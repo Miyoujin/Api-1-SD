@@ -12,15 +12,18 @@ app = Flask(__name__)
 
 #Funcion que twittea introduciendo el pin y el tweet a poner
 @app.route("/twitter", methods =['POST'])
-def twittear():
+def twitter():
     #Formularios del template
     pin = request.form['pin']
-    tweet = request.form['text']
-    
+
+
     token = auth.get_access_token(verifier=pin)
     auth.set_access_token(token[0], token[1])
-
+    return render_template('tweetea.html')
+@app.route("/twittear", methods = ['get'])
+def twittear():
     #Escribimos tweet
+    tweet = request.form['text']
     api = tweepy.API(auth)
     api.update_status(status=tweet)
     return render_template('exito.html')
@@ -38,6 +41,3 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
