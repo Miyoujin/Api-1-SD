@@ -1,0 +1,2 @@
+﻿El fichero twitter.py es el correspondiente a la api de twitter y example.py es de la api de dropbox. Estos ficheros
+contienen las pruebas realizadas a lo largo de estás semanas.
