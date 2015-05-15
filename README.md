@@ -11,4 +11,4 @@ de Twitter y la API de Dropbox.
 Con estas dos API vamos a hacer lo siguiente:
 
   - Desde Twitter nos podremos loguear y Twittear.
-  - Lo que Twitteemos será guardado en un fichero en Dropbox.
+  - Lo que Twitteemos será guardado en un fichero en Dropbox que también nos tendremos que haber logueado.
