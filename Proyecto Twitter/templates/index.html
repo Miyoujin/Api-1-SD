@@ -1,7 +1,8 @@
 <html>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='estilos.css') }}">
 	<head><title>Prueba twitter</title></head>
 <body>
-	<div>
+	<div id="FormularioS">
         <a href="{{urlTwitter}}" target="_blank">Obtén aquí tu pin de twitter</a><br>
         <a href="{{urlDropbox}}" target="_blank">Obtén aquí tu pin de dropbox</a><br>
 		<form action="/twitter" method="POST">
