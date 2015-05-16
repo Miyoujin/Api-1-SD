@@ -17,9 +17,6 @@ app_secret = 'xe4ssh1q9wr9vf9'
 flow = dropbox.client.DropboxOAuth2FlowNoRedirect(app_key, app_secret)
 app = Flask(__name__)
 
-
-
-
 #Funcion que twittea introduciendo el pin y el tweet a poner
 @app.route("/twitter", methods =['POST'])
 def twitter():
@@ -28,7 +25,6 @@ def twitter():
     pint = request.form['pint']
     pind = request.form['pind']
 
-
     token = auth.get_access_token(verifier=pint)
     auth.set_access_token(token[0], token[1])
 
@@ -36,6 +32,7 @@ def twitter():
     client = dropbox.client.DropboxClient(access_token)
 
     return render_template('tweetea.html')
+
 @app.route("/twittear", methods = ['POST'])
 def twittear():
 
@@ -48,19 +45,11 @@ def twittear():
     
     return render_template('exito.html')
 
-#Obten aqui tu pin
-@app.route("/loginTwitter")
-def loginTwitter():
-    webbrowser.open(auth.get_authorization_url())
-    return index()
-@app.route("/loginDropbox")
-def loginDropbox():
-    webbrowser.open(flow.start())
-    return index()
-
 @app.route("/")
 def index():
-    return render_template('index.html')
+    urlTwitter = auth.get_authorization_url()
+    urlDropbox = flow.start()
+    return render_template('index.html', urlTwitter=urlTwitter, urlDropbox=urlDropbox)
 
 
 if __name__ == "__main__":

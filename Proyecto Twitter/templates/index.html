@@ -2,11 +2,12 @@
 	<head><title>Prueba twitter</title></head>
 <body>
 	<div>
-        <a href="/loginTwitter">Obtén aquí tu pin</a><br>
+        <a href="{{urlTwitter}}" target="_blank">Obtén aquí tu pin de twitter</a><br>
+        <a href="{{urlDropbox}}" target="_blank">Obtén aquí tu pin de dropbox</a><br>
 		<form action="/twitter" method="POST">
-			Pin: <input type="text" name="pin"><br>
-			Tweet: <input type="text" name="text"><br>
-			<input type="submit" name="formulario" value="Twittear">
+			Pin Twitter: <input type="text" name="pint"><br>
+			Pin Dropbox: <input type="text" name="pind"><br>
+			<input type="submit" name="formulario" value="Login">
 		</form>
 	<div>
 </body>
