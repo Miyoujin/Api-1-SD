@@ -21,6 +21,9 @@ app_secret = 'xe4ssh1q9wr9vf9'
 
 app = Flask(__name__)
 
+# Al principio de cada funcion comprobamos
+# siempre el tiempo por si expira el tiempo de la clave
+
 @app.route("/twitter")
 def menu():
     global logueado
@@ -62,7 +65,7 @@ def tweetea():
     else:
         return render_template('tweetea.html')
 
-@app.route("/searchKey")
+@app.route("/searchKey", methods = ['POST'])
 def searchKey():
     global logueado
     compruebaTiempo()
@@ -71,15 +74,23 @@ def searchKey():
     else:
         return render_template('searchKey.html')
 
+    #Parametros para buscar
+    s = request.form['tema'];
+    keys = request.form['pClave']
+    keys = keys.split(',', len(keys))
+    count = request.form['count']
+    nameFile = request.form['nombre']
+
+    searchKey(s,keys,count,nameFile,twitter_api,dropbox_api)
+
+    return render_template('exito.html')
+
+
 @app.route("/twittear", methods = ['POST'])
 def twittear():
     global logueado
     global auth
-    compruebaTiempo()
-    if logueado == False:
-        return index()
-    else:
-        return render_template('tweetea.html')
+
     #Escribimos tweet
     tweet = request.form['tweet']
     api = tweepy.API(auth)
@@ -87,7 +98,11 @@ def twittear():
 
     dropbox_api.WriteDropbox(client,tweet)
 
-    return render_template('exito.html')
+    compruebaTiempo()
+    if logueado == False:
+        return index()
+    else:
+        return render_template('exito.html')
 
 
 @app.route("/")
