@@ -1,0 +1,23 @@
+<html>
+<head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='estilos.css') }}">
+<title>Escribe tu consulta</title>
+<head>
+<body>
+<div id="FormularioR">
+<h1> Escriba su consulta </h1>
+<form action="/searchKey" method="post">
+  <p>Tema: </p> <input type="text" name="tema">
+  <p>
+  Las palabras clave deben ir separadas con comas<br>  
+  Palabras clave:</p> 
+<textarea name="pClave" rows="6" cols="60" maxlength='500' resize='none'></textarea><br>
+  <p>Numero de resultados:</p><input type="number" name="count"><br>
+  <p>Nombre del fichero:</p><input type="text" name="nombre"><br><br><br><br>
+  <span class="btn"><input type="submit" value="Buscar"></span>
+
+</form>
+  <br><br><span class="btn"><a href="/twitter">Volver al menu</a></span>
+</div>
+</body>
+</html>
