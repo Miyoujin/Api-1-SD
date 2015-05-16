@@ -4,7 +4,7 @@ from flask import Flask, request
 import webbrowser
 import tweepy
 import dropbox
-import WriteInDropbox
+import dropbox_api
 
 # Twitter
 consumer_key = 'dGuswhwb8LVKeVUcnDT3d8F3m'
@@ -41,7 +41,7 @@ def twittear():
     api = tweepy.API(auth)
     api.update_status(status=tweet)
 
-    WriteInDropbox.WriteDropbox(client,tweet)
+    dropbox_api.WriteDropbox(client,tweet)
     
     return render_template('exito.html')
 
