@@ -31,7 +31,15 @@ def twitter():
     access_token, user_id = flow.finish(pind)
     client = dropbox.client.DropboxClient(access_token)
 
+    return render_template('menu.html')
+
+@app.route("/tweetea")
+def tweetea():
     return render_template('tweetea.html')
+
+@app.route("/searchKey")
+def searchKey():
+    return render_template('searchKey.html')
 
 @app.route("/twittear", methods = ['POST'])
 def twittear():

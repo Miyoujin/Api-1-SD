@@ -2,12 +2,14 @@
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='estilos.css') }}">
 	<head><title>Prueba twitter</title></head>
 <body>
+    <br>
 	<div id="FormularioS">
+        <br><br>
         <a href="{{urlTwitter}}" target="_blank">Obtén aquí tu pin de twitter</a><br>
-        <a href="{{urlDropbox}}" target="_blank">Obtén aquí tu pin de dropbox</a><br>
+        <a href="{{urlDropbox}}" target="_blank">Obtén aquí tu pin de dropbox</a><br><br>
 		<form action="/twitter" method="POST">
 			Pin Twitter: <input type="text" name="pint"><br>
-			Pin Dropbox: <input type="text" name="pind"><br>
+			Pin Dropbox: <input type="text" name="pind"><br><br>
 			<input type="submit" name="formulario" value="Login">
 		</form>
 	<div>
