@@ -75,18 +75,20 @@ def searchKey():
 def twittear():
     global logueado
     global auth
+    compruebaTiempo()
+    if logueado == False:
+        return index()
+    else:
+        return render_template('tweetea.html')
     #Escribimos tweet
     tweet = request.form['tweet']
     api = tweepy.API(auth)
     api.update_status(status=tweet)
 
     dropbox_api.WriteDropbox(client,tweet)
-    
-    compruebaTiempo()
-    if logueado == False:
-        return index()
-    else:
-        return render_template('exito.html')
+
+    return render_template('exito.html')
+
 
 @app.route("/")
 def index():
@@ -106,9 +108,9 @@ def index():
 def compruebaTiempo():
     global tLog
     global logueado
-    
+
     tNow = datetime.datetime.now()
-    
+
     if (tNow - tLog).seconds > 299:
         logueado = False
 
