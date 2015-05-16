@@ -23,25 +23,24 @@ def LoginInDropbox():
     return client
 
 def WriteDropbox(client, tweet):
-    aux=client.search('/log/','magnum-opus.txt')
+    aux=client.search('/log/','logTwitter.txt')
 
     print "     Print aux         "
     print aux
     #Borramos el archivo local para que siempre este sincronizado con dropbox
-    out = open('magnum-opus.txt', "w")
+    out = open('logTwitter.txt', "w")
     #f.close()
     if len(aux) !=0:
-        f, metadata = client.get_file_and_metadata('/log/magnum-opus.txt')
-        #out = open('magnum-opus.txt', "w")
+        f, metadata = client.get_file_and_metadata('/log/logTwitter.txt')
         out.write(f.read())
         f.close()
     out.close()
     #Escribimos en el fichero
     tweet = tweet + '\n\n'
     tweet = tweet.encode('utf-8')
-    f = open('magnum-opus.txt', 'a')
+    f = open('logTwitter.txt', 'a')
     f.write(tweet)
     f.close()
     #Actualizamos el fichero que hay en dropbox, sino existe lo crea
-    f = open('magnum-opus.txt', 'rb')
-    response = client.put_file('/log/magnum-opus.txt', f,True)
+    f = open('logTwitter.txt', 'rb')
+    response = client.put_file('/log/logTwitter.txt', f,True)
