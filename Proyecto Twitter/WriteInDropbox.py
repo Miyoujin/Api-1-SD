@@ -7,14 +7,14 @@ def WriteDropbox(client, tweet):
     print "     Print aux         "
     print aux
     #Borramos el archivo local para que siempre este sincronizado con dropbox
-    f = open('magnum-opus.txt', "w")
-    f.close()
+    out = open('magnum-opus.txt', "w")
+    #f.close()
     if len(aux) !=0:
         f, metadata = client.get_file_and_metadata('/log/magnum-opus.txt')
-        out = open('magnum-opus.txt', "w")
+        #out = open('magnum-opus.txt', "w")
         out.write(f.read())
-        out.close()
         f.close()
+    out.close()
     #Escribimos en el fichero
     tweet = tweet + '\n\n'
     tweet = tweet.encode('utf-8')
