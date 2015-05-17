@@ -44,13 +44,13 @@ def WriteDropbox(client, tweet):
     response = client.put_file('/log/logTwitter.txt', f,True)
 
 
-def WriteDropboxSearch(client, nameTweet, nameFile):
+def WriteDropboxSearch(client, tweet, nameFile):
 
   #Borramos el archivo local para que siempre este sincronizado con dropbox
-  out = open(nameFile, "w")
+  
   #f.close()
   #Escribimos en el fichero
-  nametweet = nametweet + '\n\n'
+  tweet = tweet + '\n\n'
   tweet = tweet.encode('utf-8')
   f = open(nameFile, 'a')
   f.write(tweet)

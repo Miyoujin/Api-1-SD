@@ -79,18 +79,20 @@ def sKey():
 @app.route("/searchKey", methods =['POST'])
 def buscaKey():
     global logueado
+    global auth
+
     compruebaTiempo()
     if logueado == False:
         return index()
     else:
-    #Parametros para buscar
+        #Parametros para buscar
         s = request.form['tema'];
         keys = request.form['pClave']
         keys = keys.split(',', len(keys))
         count = request.form['count']
         nameFile = request.form['nombre']
 
-        twitter_api.searchKey(s,keys,count,nameFile,twitter_api,dropbox_api)
+        twitter_api.searchKey(s,keys,count,nameFile,auth,client)
 
         return render_template('exito.html')
 
