@@ -5,20 +5,14 @@ import dropbox_api
 def searchKey(s,keys,count,nameFile,auth,client):
 
     api = tweepy.API(auth)
-    public_tweets = api.home_timeline()
+    results = api.search(q = s, rpp = count, show_user = True)
 
     out = open(nameFile, "w")
     out.close()
-
-    for tweet in public_tweets:
-         dropbox_api.WriteDropboxSearch(client, tweet.text, nameFile)
-
-
-
-  #results = auth.search.tweets(q = s, count = count)
-
-  #for users in results["statuses"]:
-   # for k in keys:
-    #  if keys in results["text"]:
-     #   strings = users["user"]["screen_name"] + '\t' + results["text"]
-      #  WriteDropboxSearch(client, string, nameFile)
+    Alltweet = ''
+    for tweet in results:
+        for k in keys:
+            if k in tweet.text:
+                tmp = '@'+tweet.user.screen_name + '\t' + tweet.text + '\n\n'
+                Alltweet =  Alltweet + tmp
+    dropbox_api.WriteDropboxSearch(client,Alltweet, nameFile)
