@@ -34,7 +34,7 @@ def menu():
     else:
         return render_template('menu.html')
 
-#Funcion que twittea introduciendo el pin y el tweet a poner
+#Funcion para loguearnos en Twitter y en Dropbox
 @app.route("/twitter", methods =['POST'])
 def twitter():
     global client
@@ -57,6 +57,7 @@ def twitter():
 
     return menu()
 
+# Comprobamos que no ha expirado el tiempo de la clave
 @app.route("/tweetea")
 def tweetea():
     global logueado
@@ -66,6 +67,7 @@ def tweetea():
     else:
         return render_template('tweetea.html')
 
+# Comprobamos que no ha expirado el tiempo de la clave
 @app.route("/searchKey")
 def sKey():
     global logueado
@@ -75,7 +77,7 @@ def sKey():
     else:
         return render_template('searchKey.html')
 
-
+# Codigo para buscar en Twitter
 @app.route("/searchKey", methods =['POST'])
 def buscaKey():
     global logueado
@@ -85,18 +87,18 @@ def buscaKey():
     if logueado == False:
         return index()
     else:
-        #Parametros para buscar
+        # Parametros para buscar
         s = request.form['tema'];
         keys = request.form['pClave']
         keys = keys.split(',', len(keys))
         count = request.form['count']
         nameFile = request.form['nombre']
-
+        # Llamamos a la funcion para buscar en Twitter
         twitter_api.searchKey(s,keys,count,nameFile,auth,client)
 
         return render_template('exitoDrop.html')
 
-
+# Codigo para Twittear
 @app.route("/twittear", methods = ['POST'])
 def twittear():
     global logueado
@@ -104,9 +106,10 @@ def twittear():
 
     #Escribimos tweet
     tweet = request.form['tweet']
+    # Publicamos el Tweet
     api = tweepy.API(auth)
     api.update_status(status=tweet)
-
+    # Escribimos en Dropbox el Tweet
     dropbox_api.WriteDropbox(client,tweet)
 
     compruebaTiempo()
@@ -116,6 +119,7 @@ def twittear():
         return render_template('exito.html')
 
 
+# Codigo donde se piden los pin para loguearse en Twitter y Dropbox
 @app.route("/")
 def index():
     global logueado
@@ -131,6 +135,7 @@ def index():
         urlDropbox = flow.start()
         return render_template('index.html', urlTwitter=urlTwitter, urlDropbox=urlDropbox)
 
+# Funcion para comprobar el tiempo por si expira la clave
 def compruebaTiempo():
     global tLog
     global logueado

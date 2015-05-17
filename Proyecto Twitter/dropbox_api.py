@@ -1,13 +1,13 @@
 # Incluimos el SDK de Dropbox
 import dropbox
 
-#
+# Funcion para escribir nuestros Tweets en un archivo en dropbox
 def WriteDropbox(client, tweet):
     aux=client.search('/log/','logTwitter.txt')
 
     #Borramos el archivo local para que siempre este sincronizado con dropbox
     out = open('logTwitter.txt', "w")
-    #f.close()
+    out.close()
     if len(aux) !=0:
         f, metadata = client.get_file_and_metadata('/log/logTwitter.txt')
         out.write(f.read())
@@ -23,12 +23,12 @@ def WriteDropbox(client, tweet):
     f = open('logTwitter.txt', 'rb')
     response = client.put_file('/log/logTwitter.txt', f,True)
 
-
+# Funcion para escribir las busquedas realizadas en Twitter
 def WriteDropboxSearch(client, Alltweet, nameFile):
 
   #Borramos el archivo local para que siempre este sincronizado con dropbox
-
-  #f.close()
+  out = open(nameFile, "w")
+  out.close()
   #Escribimos en el fichero
   Alltweet = Alltweet.encode('utf-8')
   f = open(nameFile, 'a')
