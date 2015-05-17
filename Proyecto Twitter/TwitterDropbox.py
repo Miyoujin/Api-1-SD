@@ -94,7 +94,7 @@ def buscaKey():
 
         twitter_api.searchKey(s,keys,count,nameFile,auth,client)
 
-        return render_template('exito.html')
+        return render_template('exitoDrop.html')
 
 
 @app.route("/twittear", methods = ['POST'])
