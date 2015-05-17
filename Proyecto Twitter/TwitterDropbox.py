@@ -6,6 +6,7 @@ import webbrowser
 import tweepy
 import dropbox
 import dropbox_api
+import twitter_api
 
 logueado = False
 tLog = datetime.datetime.now()
@@ -65,8 +66,8 @@ def tweetea():
     else:
         return render_template('tweetea.html')
 
-@app.route("/searchKey", methods = ['POST'])
-def searchKey():
+@app.route("/searchKey")
+def sKey():
     global logueado
     compruebaTiempo()
     if logueado == False:
@@ -74,16 +75,24 @@ def searchKey():
     else:
         return render_template('searchKey.html')
 
+
+@app.route("/searchKey", methods =['POST'])
+def buscaKey():
+    global logueado
+    compruebaTiempo()
+    if logueado == False:
+        return index()
+    else:
     #Parametros para buscar
-    s = request.form['tema'];
-    keys = request.form['pClave']
-    keys = keys.split(',', len(keys))
-    count = request.form['count']
-    nameFile = request.form['nombre']
+        s = request.form['tema'];
+        keys = request.form['pClave']
+        keys = keys.split(',', len(keys))
+        count = request.form['count']
+        nameFile = request.form['nombre']
 
-    searchKey(s,keys,count,nameFile,twitter_api,dropbox_api)
+        twitter_api.searchKey(s,keys,count,nameFile,twitter_api,dropbox_api)
 
-    return render_template('exito.html')
+        return render_template('exito.html')
 
 
 @app.route("/twittear", methods = ['POST'])
